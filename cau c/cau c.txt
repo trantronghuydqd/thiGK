@@ -1,0 +1,127 @@
+import React, {useState, useEffect} from 'react';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+const PRODUCTS = [
+  {
+    id: 1,
+    name: "Beef Ramen",
+    price: 23,
+    category: "Ramen",
+    like: 5,
+    image: "./assets/product1.png"
+  },
+  {
+    id: 2,
+    name: "Premeum Ramen",
+    price: 27,
+    category: "Ramen",
+    like: 5,
+    image: "./assets/product2.png"
+  },
+  {
+    id: 3,
+    name: "Saited Egg Ramen",
+    price: 25,
+    category: "Ramen",
+    like: 5,
+    image: "./assets/product3.png"
+  },
+  {
+    id: 4,
+    name: "Chicken Ramen",
+    price: 20,
+    category: "Drink",
+    like: 5,
+    image: "./assets/product4.png"
+  },
+  {
+    id: 5,
+    name: "Crabstick Ramen",
+    price: 17,
+    category: "Drink",
+    like: 5,
+    image: "./assets/product5.png"
+  },
+  {
+    id: 6,
+    name: "Spicy Ramen",
+    price: 22,
+    category: "Drink",
+    like: 5,
+    image: "./assets/product6.png"
+  },
+]
+
+const mapImage = (nameProduct) => {
+  switch(nameProduct){
+    case "product1": return require('./assets/product1.png')
+    case "product2": return require("./assets/product2.png")
+    case "product3": return require("./assets/product3.png")
+    case "product4": return require('./assets/product4.png')
+    case "product5": return require("./assets/product5.png")
+    case "product6": return require("./assets/product6.png")
+  }
+} 
+
+
+const HomeScreen = ({navigation}) => {
+  const cates = ['All', ...new Set(PRODUCTS.map(pro => pro.category))]
+  const [cateSelec, setCateSelec] = useState('All')
+  const filter = PRODUCTS.filter(pro => {
+    if (cateSelec == 'All') return true
+    return cateSelec === pro.category
+  })
+  const renderItem = ({item}) => (
+    <TouchableOpacity>
+    <Image source = {mapImage(item.name)}>
+    </Image>
+    <Text>
+    </Text>
+    </TouchableOpacity>
+  )
+  return(
+    <View>
+    // header
+      <View><Text>
+      🚪</Text>
+      <Text>Ingoude Ramen</Text>
+      <Image source = {require('./assets/icon.png')} style = {{width:30, height: 30}}>
+      </Image>
+      </View>
+    </View>
+  )
+}
+
+const Products = ({navigation}) => {
+ 
+  return (
+    <View>
+     
+    </View>
+  )
+}
+
+const ProductDetails = ({route}) => {
+  const {item} = route.params
+  return (
+    <View>
+     
+    </View>
+  )
+}
+export default function App() {
+  return (
+    <NavigationContainer>
+    <Stack.Navigator>
+    <Stack.Screen name = 'HomeSrceen' component = {HomeScreen}></Stack.Screen>
+    <Stack.Screen name = 'Products' component = {Products}></Stack.Screen>
+    <Stack.Screen name = 'ProductDetails' component = {ProductDetails}></Stack.Screen>
+    </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+// const styles = StyleSheet.create();
