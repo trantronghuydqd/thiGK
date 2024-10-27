@@ -57,12 +57,12 @@ const PRODUCTS = [
 
 const mapImage = (nameProduct) => {
   switch(nameProduct){
-    case "product1": return require('./assets/product1.png')
-    case "product2": return require("./assets/product2.png")
-    case "product3": return require("./assets/product3.png")
-    case "product4": return require('./assets/product4.png')
-    case "product5": return require("./assets/product5.png")
-    case "product6": return require("./assets/product6.png")
+    case "Beef Ramen": return require('./assets/product1.png')
+    case "Premeum Ramen": return require("./assets/product2.png")
+    case "Saited Egg Ramen": return require("./assets/product3.png")
+    case "Chicken Ramen": return require('./assets/product4.png')
+    case "Crabstick Ramen": return require("./assets/product5.png")
+    case "Spicy Ramen": return require("./assets/product6.png")
   }
 } 
 
@@ -76,21 +76,32 @@ const HomeScreen = ({navigation}) => {
   })
   const renderItem = ({item}) => (
     <TouchableOpacity>
-    <Image source = {mapImage(item.name)}>
+    <Image source = {mapImage(item.name)} style = {{width: 100, height: 100}}>
     </Image>
-    <Text>
+    <Text>{item.name}
+    </Text><Text>{item.price}
     </Text>
+    <TouchableOpacity><Text>♡</Text>
+    </TouchableOpacity>
     </TouchableOpacity>
   )
   return(
     <View>
     // header
-      <View><Text>
+      <View style = {{flex: 1, flexDirection: "row", justifyContent: "space-between"}}><Text>
       🚪</Text>
       <Text>Ingoude Ramen</Text>
       <Image source = {require('./assets/icon.png')} style = {{width:30, height: 30}}>
       </Image>
       </View>
+      // category
+      {cates.map(cate => (
+        <TouchableOpacity onPress= {() => setCateSelec(cate)}>{cate}
+        </TouchableOpacity>
+      ))}
+      // flatlist
+      <FlatList data = {filter} renderItem = {renderItem} numColumns = {2}>
+      </FlatList>
     </View>
   )
 }
