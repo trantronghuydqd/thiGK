@@ -108,11 +108,6 @@ const HomeScreen = ({navigation}) => {
       <Image source = {require('./assets/icon2.png')} style= {{width:30, height: 30}}>
       </Image>
       </View>
-
-      
-      <View>
-      <Image source = {require('./assets/banner.PNG')} style = {{width: 300., height: 110, marginBottom: 20}}></Image>
-      </View>
       
 
       <View style = {{flex: 1, flexDirection: "row", justifyContent: "space-between" , marginBottom: 10}}>{cates.map(cate => (
